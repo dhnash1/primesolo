@@ -1,0 +1,41 @@
+<body ng-app="app">
+    <h1>Dice Roller</h1>
+    <div ng-controller="dice">
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d20-Opaque2.jpg" alt="" ng-click="d(20)">
+        <p class="roll" id="roll20">Roll: {{roll20}}</p>
+        <div class="vantage">{{advo20}} : {{van20}} </div>
+      </div>
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d12-Opaque.jpg" alt="" ng-click="d(12)">
+        <p class="roll" id="roll12">Roll: {{roll12}}</p>
+        <div class="vantage">{{advo12}} : {{van12}} </div>
+      </div>
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d10-Opaque.jpg" alt="" ng-click="d(10)">
+        <p class="roll" id="roll10">Roll: {{roll10}}</p>
+        <div class="vantage">{{advo10}} : {{van10}} </div>
+      </div>
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d8-Opaque.jpg" alt="" ng-click="d(8)">
+        <p class="roll" id="roll8">Roll: {{roll8}}</p>
+        <div class="vantage">{{advo8}} : {{van8}} </div>
+      </div>
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d6-Opaque.jpg" alt="" ng-click="d(6)">
+        <p class="roll" id="roll6">Roll: {{roll6}}</p>
+        <div class="vantage">{{advo6}} : {{van6}} </div>
+      </div>
+      <div class="die">
+        <img src="http://i19.photobucket.com/albums/b167/vulpinoid/RPG%20Font/Dice-d4-Opaque.jpg" alt="" ng-click="d(4)">
+        <p class="roll" id="roll4">Roll: {{roll4}}</p>
+        <div class="vantage">{{advo4}} : {{van4}} </div>
+      </div>
+      <button type="button" name="button" ng-click="dAll()">Roll all!</button>
+      <select ng-model="adv" >
+        <option value="42" ng-init>No Advantage</option>
+        <option value="0">Advantage</option>
+        <option value="1">Disadvandage</option>
+      </select>
+    </div>
+  </body>

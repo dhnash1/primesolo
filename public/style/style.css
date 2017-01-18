@@ -1,0 +1,39 @@
+body{
+  text-align: center;
+}
+.vantage{
+  color: grey;
+}
+.die{
+  border: solid black 5px;
+  display: inline-block;;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.roll{
+  border-top: solid black 5px;
+  display: block;
+  font-weight: bold;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+img{
+  display: block;
+  height: 100px;
+  width: 100px;
+  margin: 0px auto;
+
+}
+
+.crit{
+  color: :  lime;
+  background-color: lime;
+}
+
+.fail{
+  color: : red;
+  background-color: red;
+}
