@@ -1,7 +1,7 @@
 console.log("JS");
-
+var logdIn = false;
 var app = angular.module("app", ["ngRoute"]);
-
+if (logdIn){
 app.config(["$routeProvider", function($routeProvider){
   $routeProvider
     .when("/index" , {
@@ -32,7 +32,10 @@ app.config(["$routeProvider", function($routeProvider){
       redirectTo : "/index"
     });
 }]);
+} else {
 
+
+}
 app.controller("home", ["$scope", "$http", function($scope, $http){
 
   console.log("angular");
@@ -122,6 +125,7 @@ app.controller("login", ["$scope", "$http", function($scope, $http){
       data: credent
     }).then(function success(response){
       console.log("Logged in!", response);
+      logdIn = true;
     });//end success
   };//end scope.login function
 

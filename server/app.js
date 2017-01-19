@@ -34,7 +34,7 @@ app.use(session({
    resave: 'true',
    saveUninitialized: false,
    cookie: { maxage: 60000, secure: false }
-}));//~~~session..?~~~//
+}));//~~~session cookie~~~//
 
 //~~~Use that passport~~~//
 app.use(passport.initialize());
