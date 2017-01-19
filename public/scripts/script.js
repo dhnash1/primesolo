@@ -20,6 +20,14 @@ app.config(["$routeProvider", function($routeProvider){
       templateUrl : 'views/tracker.html',
       controller : 'tracker'
     })
+    .when("/login" , {
+      templateUrl : 'views/login.html',
+      controller : 'login'
+    })
+    .when("/register" , {
+      templateUrl : 'views/register.html',
+      controller : 'register'
+    })
     .otherwise({
       redirectTo : "/index"
     });
@@ -34,7 +42,6 @@ app.controller("groups", ["$scope", "$http", function($scope, $http){
   console.log("angular");
 }]);
 app.controller("dice", ["$scope", "$http", function($scope, $http){
-  console.log("dice");
     $scope.roll = function(num){
       var x = parseInt((Math.random() * num) + 1);
       return x;
@@ -102,4 +109,42 @@ app.controller("dice", ["$scope", "$http", function($scope, $http){
 app.controller("tracker", ["$scope", "$http", function($scope, $http){
 
   console.log("angular");
+}]);
+app.controller("login", ["$scope", "$http", function($scope, $http){
+  $scope.login = function(){
+    var credent = {
+      username: $scope.username,
+      password: $scope.password
+    };
+    $http({
+      method: "POST",
+      url:"/",
+      data: credent
+    }).then(function success(response){
+      console.log("Logged in!", response);
+    });//end success
+  };//end scope.login function
+
+}]);
+app.controller("register", ["$scope", "$http", function($scope, $http){
+
+  $scope.register = function(){
+    var regUser={
+      username: $scope.username,
+      password: $scope.password
+    };
+    if(regUser.password != $scope.confirm){
+      $scope.match = "Passwords don't match!";
+    }else {
+      $scope.match = "";
+      $http({
+        method : "POST",
+        url : "/regis",
+        data : regUser
+      }).then(function reg(response){
+        console.log("User created!");
+      });
+    }
+
+  };//end register
 }]);
