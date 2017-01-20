@@ -2,24 +2,16 @@
 <button ng-show="false" type="button" name="button" ng-click="authentic()">Test</button>
 
 <div class="groupList">
-  <input type="text" name="" placeholder="New group">
+  <input type="text" name="" placeholder="New group" ng-model="group">
   <button type="button" name="button" ng-click="newGroup()">Create group</button>
-  <ul>
-    <li>lorem</li>
-    <li>impus</li>
-    <li>Jongo</li>
-    <li>Cronggo</li>
-    <li>bongo</li>
+  <ul ng-repeat="groops in groupArr track by $index">
+    <li ng-click="gettum()">{{groops.groupName}}</li>
   </ul>
 </div>
 <div class="playerList">
-  <input type="text" name="" value="" placeholder="New Player">
+  <input type="text" name="" value="" placeholder="New Player" ng-model="playa">
   <button type="button" name="button" ng-click="newPlayer()">Create player</button>
-  <ul>
-    <li>lorem</li>
-    <li>impus</li>
-    <li>Jongo</li>
-    <li>Cronggo</li>
-    <li>bongo</li>
+  <ul ng-repeat="players in selectedGroup track by $index">
+    {{players}}
   </ul>
 </div>

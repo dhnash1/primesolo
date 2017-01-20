@@ -38,6 +38,56 @@ app.controller("home", ["$scope", "$http", function($scope, $http){
   console.log("angular");
 }]);
 app.controller("groups", ["$scope", "$http", function($scope, $http){
+var groups = [];
+var sGroups;
+$scope.load = function(){
+  $http({
+    method : "GET",
+    url : "/group"
+  }).then(function(res){
+      $scope.groupArr = res.data;
+  });
+};//end load function
+
+$scope.load();
+
+$scope.newGroup = function(){
+  var groop = $scope.group;
+  var obj = {
+    groupName : groop,
+    players:[]
+  };
+  $http({
+    method : "POST",
+    url : "/group",
+    data : obj
+  }).then(function(response){
+    console.log("did this: ", response);
+  });
+  $scope.load();
+};//end newGroup
+
+$scope.gettum = function(){
+  console.log(this);
+  sGroups = this.groops._id;
+  $scope.selectedGroup = this.groops.players;
+
+};//end gettum
+$scope.newPlayer = function(){
+  var newbie = $scope.playa;
+  console.log($scope.selectedGroup);
+  console.log(sGroups);
+  $http({
+    method : "PUT",
+    url : "/group",
+    data: {
+      id: sGroups,
+      player : newbie
+    }
+  }).then(function(response){
+    console.log("What happened: ", response);
+  });
+};//end newPlayer
 
   $scope.authentic = function(){
     $http({
@@ -46,8 +96,7 @@ app.controller("groups", ["$scope", "$http", function($scope, $http){
     }).then(function(response){
       console.log("auth:", response.user);
     });
-
-} ;
+};//end $scope.authentic
 }]);
 app.controller("dice", ["$scope", "$http", function($scope, $http){
     $scope.roll = function(num){

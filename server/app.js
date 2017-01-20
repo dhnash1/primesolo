@@ -24,14 +24,15 @@ MongoDB.once('open', function () {
 //~~~routes~~~//
 var indexroute = require("./routes/index");
 var regisroute = require("./routes/register");
-var authentic = require("./routes/auth")
+var authentic = require("./routes/auth");
+var group = require("./routes/groups");
 
 //~~~ middlewares~~~//
 app.use(bodyParser.json());//json parsing
 app.use(express.static(path.resolve('./public')));//public folder
 app.use(session({
    secret: 'secret',
-   key: 'Boozer',
+   key: 'user',
    resave: 'true',
    saveUninitialized: false,
    cookie: { maxage: 60000, secure: false }
@@ -45,6 +46,7 @@ app.use(passport.session());
 app.use('/', indexroute);
 app.use('/regis', regisroute);
 app.use("/auth", authentic);
+app.use("/group", group);
 
 app.listen(port, function(err){
   console.log("listening on 1337");
