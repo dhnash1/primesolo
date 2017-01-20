@@ -7,7 +7,7 @@ var schemo = require('../../models/user');
 
 router.post('/', function(req, res){
   console.log("somethings here!");
-  console.log("req.body: ", req.body);
+  console.log("req.body: ", req.user);
 
   schemo.create(req.body, function(error, res){
     if (error) {

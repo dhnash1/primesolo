@@ -37,3 +37,14 @@ img{
   color: : red;
   background-color: red;
 }
+.groupList{
+  display : inline-block;
+  border : solid black 5px;
+  float: left;
+  width: 48%
+}
+.playerList{
+  display: inline-block;
+  border : solid green 5px;
+  width:48%
+}
