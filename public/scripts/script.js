@@ -61,6 +61,7 @@ $scope.load();
 
 $scope.newGroup = function(){
   var groop = $scope.group;
+  $scope.group = null;
   var obj = {
     groupName : groop,
     players:[]
@@ -78,7 +79,7 @@ $scope.getPlayers = function(x){
   $http({
     method : "POST",
     url : "/group/players",
-    data: {info : "hello"}
+    data: {group : x}
   }).then(function(response){
     console.log(response);
   });
@@ -91,6 +92,7 @@ $scope.gettum = function(){
 };//end gettum
 $scope.newPlayer = function(){
   var newbie = $scope.playa;
+  $scope.playa = null;
   console.log($scope.selectedGroup);
   console.log(sGroups);
   $scope.getPlayers(sGroups);
