@@ -192,7 +192,7 @@ app.controller("tracker", ["$scope", "$http", function($scope, $http) {
 
     console.log("angular");
 }]);
-app.controller("login", ["$scope", "$http", function($scope, $http) {
+app.controller("login", ["$scope", "$http", "$window", function($scope, $http, $window) {
     $scope.login = function() {
         var credent = {
             username: $scope.username,
@@ -204,11 +204,12 @@ app.controller("login", ["$scope", "$http", function($scope, $http) {
             data: credent
         }).then(function success(response) {
             console.log("Logged in!", response);
+            $window.location.href = '#!/home';
         }); //end success
     }; //end scope.login function
 
 }]);
-app.controller("register", ["$scope", "$http", function($scope, $http) {
+app.controller("register", ["$scope", "$http", "$window", function($scope, $http, $window) {
 
     $scope.register = function() {
         var regUser = {
@@ -226,6 +227,7 @@ app.controller("register", ["$scope", "$http", function($scope, $http) {
             }).then(function reg(response) {
                 console.log("User created!", response);
             });
+            $window.location.href = '#!/login';
         }
 
     }; //end register
