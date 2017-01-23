@@ -44,8 +44,16 @@ $scope.load = function(){
   $http({
     method : "GET",
     url : "/group"
-  }).then(function(res){
-      $scope.groupArr = res.data;
+  }).then(function(resp){
+    console.log(resp);
+    if (typeof resp.data == 'string'){
+      console.log("string!");
+      groups = [];
+      $scope.groupArr = groups;
+      $scope.failed = resp.data;
+    } else{
+      $scope.groupArr = resp.data;
+    }
   });
 };//end load function
 
@@ -66,7 +74,15 @@ $scope.newGroup = function(){
   });
   $scope.load();
 };//end newGroup
-
+$scope.getPlayers = function(x){
+  $http({
+    method : "POST",
+    url : "/group/players",
+    data: {info : "hello"}
+  }).then(function(response){
+    console.log(response);
+  });
+};//end getplayers
 $scope.gettum = function(){
   console.log(this);
   sGroups = this.groops._id;
@@ -77,6 +93,7 @@ $scope.newPlayer = function(){
   var newbie = $scope.playa;
   console.log($scope.selectedGroup);
   console.log(sGroups);
+  $scope.getPlayers(sGroups);
   $http({
     method : "PUT",
     url : "/group",

@@ -10,7 +10,9 @@ router.post("/", function(req,res){
   schema.create(function(){
   grip = new schema({
     groupName : req.body.groupName,
-    players : req.body.players
+    players : req.body.players,
+    creator : req.user._id,
+    creatorName : req.user.username
   });
   grip.save(function(error){
     if (error){
@@ -23,14 +25,27 @@ router.post("/", function(req,res){
 });
 });
   router.get("/", function(req, res){
-    schema.find()
+    console.log(req.user);
+    if (req.user === undefined){
+      res.send("Please Log in!");
+    }else{
+    var user = req.user._id;
+
+    schema.find({creator : user})
     .then(function(result){
       res.send(result);
     })
     .catch(function(error){
       console.log("Error!", error);
     });
+  }
   });
+
+router.post("/players", function(req, res){
+    console.log("req.body", req.body.info);
+    console.log("req.user", req.user.username);
+    res.send("thanks");
+});//end playersget
 
 router.put("/", function(req, res){
   var nId = req.body.id;

@@ -3,7 +3,9 @@ var Schema = mongoose.Schema;
 
 var groupSchema = new Schema({
     groupName : {type : String, required : true},
-    players : {type : Array}
+    players : {type : Array},
+    creator : {type : String, required : true},
+    creatorName : {type : String, required : true}
 });
 
 
