@@ -51,8 +51,10 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
                 groups = [];
                 $scope.groupArr = groups;
                 $scope.failed = resp.data;
+                $scope.showo = false;
             } else {
                 $scope.groupArr = resp.data;
+                $scope.showo = true;
             }
         });
     }; //end load function
@@ -233,12 +235,24 @@ app.controller("register", ["$scope", "$http", "$window", function($scope, $http
 }]);
 
 app.controller("global", ["$scope", "$http", "$window", function($scope, $http, $window) {
-  // $scope.logout = function(){
-  //   $http({
-  //     method : "GET",
-  //     url : "/index"
-  //   }).then(function(response){
-  //     console.log("response");
-  //   });
-  // };
+  $scope.logout = function(){
+    $http({
+      method : "GET",
+      url : "/regis"
+    }).then(function(response){
+      console.log(response);
+      $window.location.href = '#!/home';
+    });
+  };//end logout
+  $scope.show = function(){
+    $http({
+      method : "GET",
+      url : "/auth"
+    }).then(function(resp){
+      console.log(resp);
+      if (typeof resp == "undefined"){
+        return true;
+      }
+    });
+  };
 }]);

@@ -7,7 +7,7 @@ router.get('/', function(req, res){
     var user = req.user;
     res.send(user);
   } else {
-    res.sendStatus(401);
+    res.send(undefined);
   }
 });
 

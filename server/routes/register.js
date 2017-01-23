@@ -19,4 +19,10 @@ router.post('/', function(req, res){
   });
 });
 
+router.get("/", function(req, res){
+  console.log("Logging out!");
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;
