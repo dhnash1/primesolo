@@ -42,9 +42,16 @@ router.post("/", function(req,res){
   });
 
 router.post("/players", function(req, res){
-    console.log("req.body", req.body.info);
+    console.log("req.body", req.body);
     console.log("req.user", req.user.username);
-    res.send("thanks");
+    schema.findById(req.body.groupId, function(err, x){
+      if(!x){
+        return next (new Error("failed"));
+      } else {
+        console.log("We found", x);
+        res.send(x);
+      }
+    });
 });//end playersget
 
 router.put("/", function(req, res){
@@ -61,8 +68,10 @@ router.put("/", function(req, res){
       p.save(function(err) {
       if (err){
         console.log('error');
+        res.send("error");
       }else{
         console.log('success');
+        res.send("success!");
       }
     });
     }
