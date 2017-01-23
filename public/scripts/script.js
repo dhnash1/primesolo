@@ -229,6 +229,16 @@ app.controller("register", ["$scope", "$http", "$window", function($scope, $http
             });
             $window.location.href = '#!/login';
         }
-
     }; //end register
+}]);
+
+app.controller("global", ["$scope", "$http", "$window", function($scope, $http, $window) {
+  // $scope.logout = function(){
+  //   $http({
+  //     method : "GET",
+  //     url : "/index"
+  //   }).then(function(response){
+  //     console.log("response");
+  //   });
+  // };
 }]);
