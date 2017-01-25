@@ -21,8 +21,8 @@
        <a href="#!/tracker">Tracker</a>
        <a href="#!/dice">Dice</a>
     </div>
-        <a id="login" href="#!/login"><button> Log in!</button> </a>
-        <button type="button" name="button" ng-click="logout()">Log out!</button>
+        <a id="login" href="#!/login" ng-hide="show()"><button> Log in!</button> </a>
+        <button type="button" name="button" ng-click="logout()" ng-show="show()">Log out!</button>
         <!-- <button type="button" name="button" ng-click="show()">TEST</button> -->
 </div>
 <main ng-view></main>

@@ -33,6 +33,33 @@ app.config(["$routeProvider", function($routeProvider) {
         });
 }]);
 
+app.factory("persist", ["$http", "$route", function($http, $route){
+  var data = {};
+
+  data.check = function(){
+
+        $http({
+            method: "GET",
+            url: "/auth"
+        }).then(function(response) {
+            console.log("auth:", response);
+            console.log(typeof response.data);
+            if (typeof response.data != "object"){
+              console.log("not logged in");
+              data.loggedIn = false;
+            } else {
+              console.log("logged in");
+              data.loggedIn = true;
+            }
+
+        });
+    }; //end $scope.authentic
+
+  data.loggedIn = false;
+
+  return data;
+}]);
+
 app.controller("home", ["$scope", "$http", function($scope, $http) {
 
     console.log("angular");
@@ -116,14 +143,7 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
 
     }; //end newPlayer
 
-    $scope.authentic = function() {
-        $http({
-            method: "GET",
-            url: "/auth"
-        }).then(function(response) {
-            console.log("auth:", response.user);
-        });
-    }; //end $scope.authentic
+
 }]);
 app.controller("dice", ["$scope", "$http", function($scope, $http) {
     $scope.roll = function(num) {
@@ -257,9 +277,8 @@ app.controller("tracker", ["$scope", "$http", function($scope, $http) {
     };
 
 }]);
+app.controller("login", ["$scope", "$http", "$window", "persist" , function($scope, $http, $window, persist) {
 
-
-app.controller("login", ["$scope", "$http", "$window", function($scope, $http, $window) {
     $scope.login = function() {
         var credent = {
             username: $scope.username,
@@ -272,6 +291,7 @@ app.controller("login", ["$scope", "$http", "$window", function($scope, $http, $
         }).then(function success(response) {
             console.log("Logged in!", response);
             $window.location.href = '#!/home';
+            $window.location.reload();
         }); //end success
     }; //end scope.login function
 
@@ -298,24 +318,24 @@ app.controller("register", ["$scope", "$http", "$window", function($scope, $http
         }
     }; //end register
 }]);
+app.controller("global", ["$scope", "$http", "$window", "$route",  "persist" , function($scope, $http, $window, $route, persist) {
 
-app.controller("global", ["$scope", "$http", "$window", function($scope, $http, $window) {
+
     $scope.logout = function() {
         $http({
             method: "GET",
             url: "/regis"
         }).then(function(response) {
             console.log(response);
+
             $window.location.href = '#!/home';
+            $window.location.reload();
         });
     }; //end logout
-    $scope.show = function() {
-        if (vis === true) {
-            vis = false;
-            return vis;
-        } else {
-            vis = true;
-            return vis;
-        }
-    };
+    $scope.show = function(){
+    return persist.loggedIn;
+  };
+
+    persist.check();
+
 }]);
