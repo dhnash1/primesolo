@@ -48,3 +48,21 @@ img{
   border : solid green 5px;
   width:48%
 }
+#navbar{
+  border-top: solid grey 5px;
+  border-bottom: solid grey 5px;
+
+}
+
+#navbar a{
+  display: inline-block;
+  border-left: solid grey 5px;
+  border-right: solid grey 5px;
+  padding: 0px;
+  width: 15%
+}
+
+.initPut{
+width : 3%;
+
+}

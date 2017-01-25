@@ -1,7 +1,7 @@
 console.log("JS");
 
 var app = angular.module("app", ["ngRoute"]);
-
+var vis = true;
 app.config(["$routeProvider", function($routeProvider) {
     $routeProvider
         .when("/index", {
@@ -78,7 +78,7 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
         $scope.load();
     }; //end newGroup
     $scope.getPlayers = function(x) {
-      console.log("getting...");
+        console.log("getting...");
         $http({
             method: "POST",
             url: "/group/players",
@@ -110,9 +110,9 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
             }
         }).then(function(response) {
             console.log("What happened: ", response);
-$scope.getPlayers(sGroups);
+            $scope.getPlayers(sGroups);
         });
-console.log("sGroups at end", sGroups);
+        console.log("sGroups at end", sGroups);
 
     }; //end newPlayer
 
@@ -191,9 +191,74 @@ app.controller("dice", ["$scope", "$http", function($scope, $http) {
     });
 }]);
 app.controller("tracker", ["$scope", "$http", function($scope, $http) {
+    var array = [];
+    var x = 0;
+    $scope.newChar = function() {
+        x++;
+        var obj = {
+            name: $scope.chara,
+            number: $scope.roll,
+            turn : false
+        };
+        $scope.chara = "";
+        $scope.roll = "";
+        array.push(obj);
+        array.sort(function(a, b) {
+            return b.number - a.number;
+        });
+        $scope.charArray = array;
+    };
+    $scope.clear = function() {
+        array = [];
+        $scope.charArray = array;
+        $scope.whosTurn = "";
+    };
+    $scope.newInit = function(){
+      console.log(this);
+      this.chars.number = this.initAdd;
+      array.sort(function(a, b) {
+          return b.number - a.number;
+      });
+      this.initAdd = "";
+      $scope.charArray = array;
+    };
 
-    console.log("angular");
+    $scope.remove = function(){
+
+      console.log(this);
+      var goFind = this.chars;
+      console.log(array);
+      var goDelete = array.indexOf(goFind);
+      array.splice(goDelete,1);
+      $scope.charArray = array;
+
+    };
+      var turn = -1;
+    $scope.turn = function(){
+      var length = array.length;
+      var num = length - 1;
+      for (var i = 0; i < length; i++) {
+        array[i].turn = false;
+      }
+
+      if (turn < num){
+        turn++;
+      } else if (turn >= (num)) {
+        turn = 0;
+      }
+      array[turn].turn = true;
+      console.log(array);
+      for (var i = 0; i < length; i++) {
+        if (array[i].turn){
+        var strang = (array[i].name + "'s turn! ");
+        $scope.whosTurn = strang;
+        }
+      }
+    };
+
 }]);
+
+
 app.controller("login", ["$scope", "$http", "$window", function($scope, $http, $window) {
     $scope.login = function() {
         var credent = {
@@ -235,24 +300,22 @@ app.controller("register", ["$scope", "$http", "$window", function($scope, $http
 }]);
 
 app.controller("global", ["$scope", "$http", "$window", function($scope, $http, $window) {
-  $scope.logout = function(){
-    $http({
-      method : "GET",
-      url : "/regis"
-    }).then(function(response){
-      console.log(response);
-      $window.location.href = '#!/home';
-    });
-  };//end logout
-  $scope.show = function(){
-    $http({
-      method : "GET",
-      url : "/auth"
-    }).then(function(resp){
-      console.log(resp);
-      if (typeof resp == "undefined"){
-        return true;
-      }
-    });
-  };
+    $scope.logout = function() {
+        $http({
+            method: "GET",
+            url: "/regis"
+        }).then(function(response) {
+            console.log(response);
+            $window.location.href = '#!/home';
+        });
+    }; //end logout
+    $scope.show = function() {
+        if (vis === true) {
+            vis = false;
+            return vis;
+        } else {
+            vis = true;
+            return vis;
+        }
+    };
 }]);
