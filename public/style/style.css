@@ -1,5 +1,6 @@
 body{
   text-align: center;
+  background-color : grey;
 }
 .vantage{
   color: grey;
@@ -49,17 +50,19 @@ img{
   width:48%
 }
 #navbar{
-  border-top: solid grey 5px;
-  border-bottom: solid grey 5px;
+  border-top: solid lightgrey 5px;
+  border-bottom: solid lightgrey 5px;
 
 }
 
 #navbar a{
   display: inline-block;
-  border-left: solid grey 5px;
-  border-right: solid grey 5px;
+  border-left: solid lightgrey 5px;
+  border-right: solid lightgrey 5px;
   padding: 0px;
-  width: 15%
+  width: 15%;
+  color: red;
+  background-color: lightyellow;
 }
 
 .initPut{

@@ -124,7 +124,7 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
 
     }; //end gettum
     $scope.newPlayer = function() {
-        var newbie = $scope.playa;
+        var newbie = { name : $scope.playa };
         $scope.playa = null;
         console.log($scope.selectedGroup);
         console.log("sGroups:", sGroups);
@@ -143,7 +143,23 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
 
     }; //end newPlayer
 
-
+    $scope.remove = function(){
+      console.log("this is", this);
+      console.log("I need", this.$index);
+      console.log("and", this.group.id);
+      var delObj = {
+        delNdx : this.$index,
+        delGroup : this.group.id
+      };
+      $http({
+        method : "POST",
+        url : "/group/del",
+        data : delObj
+      }).then(function(){
+        console.log("deleted!");
+        $scope.getPlayers(sGroups);
+      });
+    };
 }]);
 app.controller("dice", ["$scope", "$http", function($scope, $http) {
     $scope.roll = function(num) {

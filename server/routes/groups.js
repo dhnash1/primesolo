@@ -59,12 +59,13 @@ router.put("/", function(req, res){
   console.log(nId);
   var nPlayer = req.body.player;
   console.log(nPlayer);
+  console.log("req.body", req.body);
   schema.findById(nId, function(error, p){
     if(!p){
       return next(new Error('Could not load Document'));
     }else{
-      console.log(p.players);
-      p.players.push(nPlayer);
+      console.log("this is ", p.players);
+      p.players.push(req.body);
       p.save(function(err) {
       if (err){
         console.log('error');
@@ -77,5 +78,27 @@ router.put("/", function(req, res){
     }
   });
 });
+
+  router.post("/del", function(req, res){
+    console.log("Gonna delete", req.body);
+    schema.findById(req.body.delGroup, function(err, r){
+      if (!r){
+        return next(new Error('Could not load Document'));
+      } else{
+        console.log("hoo we got:", r.players);
+        var spliceTarget = r.players;
+        spliceTarget.splice(req.body.delNdx, 1);
+        r.save(function(err){
+          if(err){
+            console.log("error in delete");
+          }else{
+            console.log("delete complete");
+            res.send("deleted");
+          }
+        })
+
+      }
+    });
+  });
 
 module.exports = router;
