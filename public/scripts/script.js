@@ -142,7 +142,24 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
         console.log("sGroups at end", sGroups);
 
     }; //end newPlayer
-
+    $scope.removeG = function(){
+      console.log("this is", this);
+      console.log("I need", this.$index);
+      console.log("and", this.groops._id);
+      var delObj = {
+        delNdx : this.$index,
+        delGroup : this.groops._id
+      };
+      $http({
+        method : "POST",
+        url : "/group/delG",
+        data : delObj
+      }).then(function( res ){
+        console.log("deleted!", res);
+        $scope.load();
+        $scope.selectedGroup = "";
+      });
+    };
     $scope.remove = function(){
       console.log("this is", this);
       console.log("I need", this.$index);

@@ -41,12 +41,12 @@ router.post("/", function(req,res){
   }
   });
 
-router.post("/players", function(req, res){
+router.post("/players", function(req, res, next){
     console.log("req.body", req.body);
     console.log("req.user", req.user.username);
     schema.findById(req.body.groupId, function(err, x){
       if(!x){
-        return next (new Error("failed"));
+        return next(new Error("failed"));
       } else {
         console.log("We found", x);
         res.send(x);
@@ -78,6 +78,25 @@ router.put("/", function(req, res){
     }
   });
 });
+router.post("/delG", function(req, res){
+  console.log("Gonna group delete", req.body);
+  schema.findById(req.body.delGroup, function(err, g){
+    if(!g){
+      return next(new Error('Could not load Document'));
+    } else {
+      console.log("group found", g);
+      g.remove();
+      g.save(function(err){
+        if (err){
+          console.log("ERROR");
+        } else {
+          console.log("SUCCESS");
+          res.send("SUCCESS");
+        }
+      });
+    }
+  });
+});
 
   router.post("/del", function(req, res){
     console.log("Gonna delete", req.body);
@@ -95,7 +114,7 @@ router.put("/", function(req, res){
             console.log("delete complete");
             res.send("deleted");
           }
-        })
+        });
 
       }
     });
