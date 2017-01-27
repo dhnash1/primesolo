@@ -42,12 +42,14 @@ img{
   display : inline-block;
   border : solid black 5px;
   float: left;
-  width: 48%
+  width: 48%;
+  background-color: lightgrey;
 }
 .playerList{
   display: inline-block;
   border : solid green 5px;
-  width:48%
+  width:48%;
+  background-color: lightgrey;
 }
 #navbar{
   border-top: solid lightgrey 5px;

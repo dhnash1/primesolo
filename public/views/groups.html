@@ -15,7 +15,7 @@
   <button type="button" name="button" ng-click="newPlayer()" ng-show="showo">Create player</button>
   <br>
   {{failed}}
-  <ul ng-repeat="group in selectedGroup track by $index">
-    <li>{{group.player.name}} <button type="button" name="button" ng-click="remove()">X</button></li>
-  </ul>
+  <div ng-repeat="group in selectedGroup track by $index">
+    <p>{{group.player.name}} <button type="button" name="button" ng-click="remove()">X</button></p>
+  </div>
 </div>
