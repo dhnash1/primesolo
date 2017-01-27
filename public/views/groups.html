@@ -10,12 +10,13 @@
     <a ng-click="gettum()">{{groops.groupName}} </a> <button type="button" name="button" ng-click="removeG()">X</button>
   </div>
 </div>
-<div class="playerList">
-  <input type="text" name="" value="" placeholder="New Player" ng-model="playa" ng-show="showo">
+<div class="playerList" ng-show="showala">
+  <h3>{{gName}}</h3>
+  <input type="text" name="" value="" placeholder="New Player" ng-model="playa" ng-show="showo" >
   <button type="button" name="button" ng-click="newPlayer()" ng-show="showo">Create player</button>
   <br>
   {{failed}}
-  <div ng-repeat="group in selectedGroup track by $index">
+  <div ng-repeat="group in selectedGroup track by $index" >
     <p>{{group.player.name}} <button type="button" name="button" ng-click="remove()">X</button></p>
   </div>
 </div>

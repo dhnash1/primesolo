@@ -2,7 +2,7 @@
 
 <div ng-repeat="chars in charArray track by $index">
 
-    <p><input class = "initPut" placeholder = "{{chars.number}}" ng-keyup="$event.keyCode == 13 && newInit()" ng-model="initAdd">. {{chars.name}}   <button type="button" name="button" ng-click="remove()">X</button></p>
+    <p><input type="number" class = "initPut" placeholder = "{{chars.number}}" ng-keyup="$event.keyCode == 13 && newInit()" ng-model="initAdd">. {{chars.name}}   <button type="button" name="button" ng-click="remove()">X</button></p>
 
 </div>
 <div>
@@ -10,7 +10,7 @@
   <button type="button" name="button" ng-click="turn()">Next Turn</button>
   <br>
   <input type="text" name="" value="" placeholder="Character Name" required="true" ng-model="chara" ng-keyup="$event.keyCode == 13 && newChar()">
-  <input type="text" name="" value="" placeholder="Roll" ng-model="roll" ng-keyup="$event.keyCode == 13 && newChar()">
+  <input type="number" name="" value="" placeholder="Roll" ng-model="roll" ng-keyup="$event.keyCode == 13 && newChar()">
   <br>
   <form class="" action="index.html" method="post">
   <button type="button" name="button" ng-click="newChar()">Add Character</button>

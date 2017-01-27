@@ -57,6 +57,8 @@ app.factory("persist", ["$http", "$route", function($http, $route){
 
   data.loggedIn = false;
 
+
+
   return data;
 }]);
 
@@ -64,7 +66,7 @@ app.controller("home", ["$scope", "$http", function($scope, $http) {
 
     console.log("angular");
 }]);
-app.controller("groups", ["$scope", "$http", function($scope, $http) {
+app.controller("groups", ["$scope", "$http", "persist", function($scope, $http, persist) {
     var groups = [];
     var sGroups;
     $scope.load = function() {
@@ -120,8 +122,11 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
     $scope.gettum = function() {
         console.log(this);
         sGroups = this.groops._id;
+        nGroups = this.groops.groupName;
         $scope.getPlayers(sGroups);
-
+        persist.showo = true;
+        $scope.showala = true;
+        $scope.gName = nGroups;
     }; //end gettum
     $scope.newPlayer = function() {
         var newbie = { name : $scope.playa };
@@ -158,6 +163,7 @@ app.controller("groups", ["$scope", "$http", function($scope, $http) {
         console.log("deleted!", res);
         $scope.load();
         $scope.selectedGroup = "";
+        $scope.showala = false;
       });
     };
     $scope.remove = function(){
